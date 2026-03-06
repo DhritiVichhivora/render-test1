@@ -1,36 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Data App</title>
+<title>Student Database</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f6f9;
+text-align:center;
+}
+
+.container{
+width:60%;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h1{
+color:#333;
+}
+
+input{
+padding:10px;
+margin:5px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px 20px;
+background:#007bff;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0056b3;
+}
+
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+}
+
+th,td{
+padding:10px;
+border:1px solid #ddd;
+}
+
+th{
+background:#007bff;
+color:white;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h2>Enter Student Details</h2>
+<div class="container">
+
+<h1>Student Data Manager</h1>
+
+<h3>Add Student</h3>
 
 <form action="/submit" method="POST">
 
-<label>Name:</label><br>
-<input type="text" name="name" required><br><br>
+<input type="text" name="name" placeholder="Name" required>
+<input type="text" name="sapid" placeholder="SAP ID" required>
+<input type="number" name="age" placeholder="Age" required>
+<input type="number" name="marks" placeholder="Marks" required>
 
-<label>SAP ID:</label><br>
-<input type="text" name="sapid" required><br><br>
+<br><br>
 
-<label>Age:</label><br>
-<input type="number" name="age" required><br><br>
-
-<label>Marks:</label><br>
-<input type="number" name="marks" required><br><br>
-
-<button type="submit">Submit</button>
+<button type="submit">Add Student</button>
 
 </form>
 
-<h2>Submitted Data</h2>
+<hr>
 
-{% if users %}
-<table border="1">
+<h3>Search Student</h3>
+
+<form action="/search" method="POST">
+
+<input type="text" name="search_name" placeholder="Enter name">
+
+<button type="submit">Search</button>
+
+</form>
+
+<hr>
+
+<h3>Student Records</h3>
+
+<table>
+
 <tr>
+<th>ID</th>
 <th>Name</th>
 <th>SAP ID</th>
 <th>Age</th>
@@ -38,16 +112,20 @@
 </tr>
 
 {% for user in users %}
+
 <tr>
-<td>{{ user.name }}</td>
-<td>{{ user.sapid }}</td>
-<td>{{ user.age }}</td>
-<td>{{ user.marks }}</td>
+<td>{{user[0]}}</td>
+<td>{{user[1]}}</td>
+<td>{{user[2]}}</td>
+<td>{{user[3]}}</td>
+<td>{{user[4]}}</td>
 </tr>
+
 {% endfor %}
 
 </table>
-{% endif %}
+
+</div>
 
 </body>
 </html>
