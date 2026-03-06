@@ -126,6 +126,26 @@ color:white;
 </table>
 
 </div>
+<script>
 
+document.getElementById("studentForm").addEventListener("submit", function(e){
+
+e.preventDefault()
+
+let formData = new FormData(this)
+
+fetch("/submit",{
+method:"POST",
+body:formData
+})
+.then(response=>response.json())
+.then(data=>{
+alert(data.message)
+document.getElementById("studentForm").reset()
+})
+
+})
+
+</script>
 </body>
 </html>
