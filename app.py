@@ -39,14 +39,16 @@ def submit():
 
     conn = sqlite3.connect("students.db")
     c = conn.cursor()
+
     c.execute(
         "INSERT INTO students (name, sapid, age, marks) VALUES (?, ?, ?, ?)",
         (name, sapid, age, marks)
     )
+
     conn.commit()
     conn.close()
 
-    return "Student Added Successfully!"
+    return {"message": "Student added successfully"}
 
 @app.route("/search", methods=["POST"])
 def search():
@@ -63,3 +65,4 @@ def search():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
